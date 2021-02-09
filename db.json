@@ -3,14 +3,6 @@
     {
       "id": 1,
       "title": "Post 1"
-    },
-    {
-      "id": 2,
-      "title": "Post 2"
-    },
-    {
-      "id": 3,
-      "title": "Post 3"
     }
   ],
   "comments": [
@@ -27,12 +19,12 @@
     {
       "id": 3,
       "body": "prueba 1",
-      "postId": 3
+      "postId": 1
     },
     {
       "id": 4,
       "body": "prueba 1124152",
-      "postId": 2
+      "postId": 1
     }
   ],
   "profile": {
