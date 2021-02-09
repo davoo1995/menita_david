@@ -2,7 +2,8 @@
   "posts": [
     {
       "id": 1,
-      "title": "Post 1"
+      "title": "Post 1",
+       "msg": "este es un post de prueba"
     }
   ],
   "comments": [
