@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,16 +31,18 @@
 			        </div>
 			    </div>
 			    <div class="uk-card-body">
-			        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+			        <p>{{post.msg}}</p>
 			    </div>
 			    <div class="uk-card-footer">
-			        <div>
-					    <div class="uk-inline">
-					        <a  class="uk-form-icon" href="#" uk-icon="icon: pencil" v-on:click="addComment(post.id)"></a>
-					        <input class="uk-input" type="text" v-model="com">
-					    </div>
+			        <div uk-grid>
+			        		<div class="uk-width-expand"><input class="uk-input" type="text" v-model="coment"></div>
+			        	<div class="uk-width-auto">
+				        <button  class="uk-button uk-button-primary uk-button-small" v-on:click="addComment(post.id)">AGREGAR</button>
+				    </div>
+			        
+					    
 					</div>
-			          <div v-for="comment in comments"  v-if="comment.postId === post.id" class="uk-inline uk-width-1-1 uk-padding-small">
+			          <div :key="comment['.key']" v-for="comment in comments"  v-if="comment.postId === post.id" class="uk-inline uk-width-1-1 uk-padding-small">
 			       	<button  class="uk-button uk-button-danger uk-button-small uk-position-top-right" v-on:click="deleteComment(comment.id)">X</button>
 			       	{{comment.body}}
 			       </div>
@@ -49,19 +50,13 @@
 			</div>
 		</div>
 	</div>
-	
-
-
-
-
-
 </body>
 <script type="text/javascript">
 	var app = new Vue({
 	  el: '#principal',
 	  data () {
 	     return {
-	      com: ' ',
+	      coment: '',
 	      posts: null,
 	      comments: null,
 	      loading: true,
@@ -85,27 +80,37 @@
 		},
 		  methods: {
 			deleteComment: function (index) {
+				this.comments.splice(index, 1);
 			    axios.delete('https://my-json-server.typicode.com/davoo1995/menita_david/comments/'+ index)
 				    .then(function(response) {
-				      alert("borrado exitoso");
+	
+				      alert("borrado exitoso")				      
 				    }).catch(function(error) {
 				      console.log(error)
 				      alert("no se borro, contacta con soporte");
 				    })
+				    this.update();
 		    	},
 		    	addComment: function (id) {
-		    		 params = {
-					    body: txt,
+		    		 var  params = {
+					    body: this.coment,
 					    postId: id
 					  }
+					   this.comments.push(params)
 			    axios.post('https://my-json-server.typicode.com/davoo1995/menita_david/comments',params)
 				    .then(function(response) {
 				      alert("nuevo comentario");
+				      this.coment= ' '
 				    }).catch(function(error) {
 				      console.log(error)
 				      alert("no se agrego el comentario");
 				    })
-		    	}
+				    this.update();
+		    	},
+		    	 update() {
+			      var parsed = JSON.stringify(this.comments);
+			      localStorage.setItem('comments', parsed);
+			    }
 		  }
 
 	})
