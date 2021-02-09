@@ -23,6 +23,16 @@
       "id": 2,
       "body": "some comment",
       "postId": 1
+    },
+    {
+      "id": 3,
+      "body": "prueba 1",
+      "postId": 3
+    },
+    {
+      "id": 4,
+      "body": "prueba 1124152",
+      "postId": 2
     }
   ],
   "profile": {
